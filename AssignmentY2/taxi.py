@@ -143,3 +143,18 @@ y = taxi_df.loc[:,['price']].values
 #print(y)
 #splitting dataset into training and testing set
 from sklearn.model_selection import train_test_split
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=123)
+
+#creating linear regression model
+from sklearn.linear_model import LinearRegression
+regressor = LinearRegression()
+regressor.fit(x_train, y_train)
+
+#predictiong the test set
+y_pred = regressor.predict(x_test)
+#check accuracy
+print('Coefficents: ', regressor.coef_)
+#the mean squared error
+print('Mean squared error: %.2f' % np.mean((regressor.predict(x_test) - y_test) ** 2))
+#explained variance score: 1 is perfect predicition
+print('Variance score: %.2f' % regressor.score(x_test, y_test))

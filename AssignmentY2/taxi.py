@@ -3,7 +3,8 @@ import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import seaborn as sns
-from numpy.ma.core import count
+import pickle
+
 
 taxi_df = pd.read_csv('TaxiRideShare .csv', index_col=0)
 print(taxi_df.head())
@@ -158,3 +159,7 @@ print('Coefficents: ', regressor.coef_)
 print('Mean squared error: %.2f' % np.mean((regressor.predict(x_test) - y_test) ** 2))
 #explained variance score: 1 is perfect predicition
 print('Variance score: %.2f' % regressor.score(x_test, y_test))
+
+#save model to disk
+filename = 'finalised_model.sav'
+pickle.dump(regressor, open(filename, 'wb'))
